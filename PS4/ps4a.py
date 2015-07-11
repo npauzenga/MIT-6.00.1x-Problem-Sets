@@ -20,7 +20,7 @@ SCRABBLE_LETTER_VALUES = {
 # Helper code
 # (you don't need to understand this helper code)
 
-WORDLIST_FILENAME = "C:\Users\Nate\Documents\Projects\MIT Exercises\PS4\words.txt"
+WORDLIST_FILENAME = "/Users/natepauzenga/Documents/Projects/MIT-6.00.1x-Problem-Sets/PS4/words.txt"
 
 def loadWords():
     """
@@ -255,35 +255,43 @@ def playHand(hand, wordList, n):
       n: integer (HAND_SIZE; i.e., hand size required for additional points)
       
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
     # Keep track of the total score
+    totalScore = 0
     
     # As long as there are still letters left in the hand:
+    while calculateHandlen(hand) != 0:
     
         # Display the hand
+        displayHand(hand)
         
         # Ask user for input
+        word = raw_input('Enter word, or a "." to indicate that you are finished: ')
         
         # If the input is a single period:
-        
+        if word == ".":
             # End the game (break out of the loop)
-
-            
+            break
+     
         # Otherwise (the input is not a single period):
-        
+        else:
             # If the word is not valid:
+            if not isValidWord(word, hand, wordList):
             
                 # Reject invalid word (print a message followed by a blank line)
+                print "Invalid word, please try again."
+                print
 
             # Otherwise (the word is valid):
-
+            else:
                 # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
+                totalScore += getWordScore(word, n)
+                print word,"earned ",getWordScore(word, n), "points. Total:",totalScore,"points"
                 
                 # Update the hand 
-                
+                updateHand(hand, word)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-
+    print "Run out of letters. Total score:", totalScore,"points."
 
 #
 # Problem #5: Playing a game
