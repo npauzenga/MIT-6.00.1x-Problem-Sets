@@ -20,7 +20,7 @@ SCRABBLE_LETTER_VALUES = {
 # Helper code
 # (you don't need to understand this helper code)
 
-WORDLIST_FILENAME = "/Users/natepauzenga/Documents/Projects/MIT-6.00.1x-Problem-Sets/PS4/words.txt"
+WORDLIST_FILENAME = "C:\Users\Nate\Documents\Projects\MIT Exercises\PS4\words.txt"
 
 def loadWords():
     """
@@ -118,7 +118,7 @@ def displayHand(hand):
     for letter in hand.keys():
         for j in range(hand[letter]):
              print letter,              # print all on the same line
-    print                               # print an empty line
+    #print                               # print an empty line
 
 #
 # Problem #2: Make sure you understand how this function works and what it does!
@@ -262,6 +262,7 @@ def playHand(hand, wordList, n):
     while calculateHandlen(hand) != 0:
     
         # Display the hand
+        print "Current Hand: ", 
         displayHand(hand)
         
         # Ask user for input
@@ -285,13 +286,17 @@ def playHand(hand, wordList, n):
             else:
                 # Tell the user how many points the word earned, and the updated total score, in one line followed by a blank line
                 totalScore += getWordScore(word, n)
-                print word,"earned ",getWordScore(word, n), "points. Total:",totalScore,"points"
+                print '"%s" earned '% word,getWordScore(word, n), "points. Total:",totalScore,"points"
+                print
                 
                 # Update the hand 
-                updateHand(hand, word)
+                hand = updateHand(hand, word)
 
     # Game is over (user entered a '.' or ran out of letters), so tell user the total score
-    print "Run out of letters. Total score:", totalScore,"points."
+    if calculateHandlen(hand) == 0:
+        print "Ran out of letters. Total score:", totalScore,"points."
+    else:
+        print "Goodbye! Total score:", totalScore,"points."
 
 #
 # Problem #5: Playing a game
